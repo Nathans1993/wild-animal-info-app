@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wild Animals Info App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 20px;
+    }
+    .nav {
+      margin-bottom: 20px;
+    }
+    .nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+    .animal {
+      margin: 20px;
+      display: inline-block;
+      width: 150px;
+      cursor: pointer;
+    }
+    .animal img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .info-box {
+      background: #fff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Wild Animals Info App</h2>
+
+  <div class="nav">
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('contact')">Contact</a>
+  </div>
+
+  <div id="home">
+    <div id="animalContainer"></div>
+    <div class="info-box" id="infoBox"></div>
+  </div>
+
+  <div id="about" class="hidden">
+    <h3>About This App</h3>
+    <p>This app showcases 50+ wild animals with pictures and brief descriptions. Click on an animal to learn more about it. Educational and engaging for all ages.</p>
+  </div>
+
+  <div id="contact" class="hidden">
+    <h3>Contact</h3>
+    <p>For inquiries or suggestions, contact us at <a href="mailto:wildinfo@app.com">wildinfo@app.com</a></p>
+  </div>
+
+  <script>
+    const animals = [
+      { name: 'Lion', img: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg', info: 'The lion is a large carnivorous feline found in Africa and parts of Asia. Known as the king of the jungle, lions live in groups called prides.' },
+      { name: 'Elephant', img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg', info: 'Elephants are the largest land animals on Earth. They are known for their intelligence, memory, and strong social bonds.' },
+      { name: 'Tiger', img: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg', info: 'Tigers are powerful and solitary big cats found mainly in Asia. They are known for their striking orange coat with black stripes.' },
+      { name: 'Giraffe', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg', info: 'Giraffes are the tallest land animals. They are known for their long necks, which help them reach leaves high in trees.' },
+      { name: 'Zebra', img: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Plains_Zebra_Equus_quagga.jpg', info: 'Zebras are African equines with distinctive black-and-white striped coats. Each zebra\'s stripes are unique.' }
+    ];
+
+    const animalContainer = document.getElementById('animalContainer');
+
+    animals.forEach(animal => {
+      const div = document.createElement('div');
+      div.className = 'animal';
+      div.innerHTML = `<img src="${animal.img}" alt="${animal.name}"><p>${animal.name}</p>`;
+      div.addEventListener('click', () => {
+        showInfo(animal);
+      });
+      animalContainer.appendChild(div);
+    });
+
+    function showInfo(animal) {
+      const infoBox = document.getElementById('infoBox');
+      infoBox.innerHTML = `<h3>${animal.name}</h3><p>${animal.info}</p>`;
+      infoBox.style.display = 'block';
+    }
+
+    function showPage(page) {
+      ['home', 'about', 'contact'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      document.getElementById(page).classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
